@@ -1,29 +1,37 @@
 export const buildPrompt = (name, description) => {
   return `
 
-You are an AI product catalog classification system used in an e-commerce platform.
+You are a strict AI product catalog classification engine for an e-commerce platform.
 
-Analyze the product and generate structured catalog metadata.
+Your output must be deterministic, structured, and based ONLY on the provided product information.
 
 Product Information:
 
 Name: ${name}
 Description: ${description}
 
-Validation Rules:
+----------------------------------------
+VALIDATION RULES
+----------------------------------------
 
-If the product name or description is missing, meaningless, spam-like,
-or does not describe a real product, return:
+If the product name or description is missing, empty, meaningless,
+spam-like, or does not describe a real tangible product,
+return exactly:
 
 {
-"valid": false
+  "valid": false
 }
 
-Otherwise continue classification.
+Otherwise continue.
+
+----------------------------------------
+CATEGORY RULES
+----------------------------------------
 
 Primary category MUST be selected ONLY from this list:
 
 Electronics
+Computers
 Fashion
 Home & Kitchen
 Beauty & Personal Care
@@ -34,19 +42,50 @@ Office Supplies
 Health
 Grocery
 
-Tasks:
+- Choose the MOST semantically appropriate category.
+- Do NOT create new categories.
+- Do NOT modify category names.
+- Output must match exactly.
 
-1. Select the most relevant primaryCategory using semantic understanding.
+----------------------------------------
+CLASSIFICATION TASKS
+----------------------------------------
 
-2. Generate ONE specific primarySubCategory.
+1. primaryCategory
+   - Select one category only.
 
-3. Generate 2–4 relatedSubCategories closely related to the product.
+2. primarySubCategory
+   - One specific and meaningful subcategory.
+   - Must be narrower than primary category.
 
-4. Generate 5–10 SEO tags useful for e-commerce search.
+3. relatedSubCategories
+   - Generate 2–4 closely related subcategories.
+   - Must belong under the same primary category.
+   - Avoid repetition.
 
-5. Determine sustainabilityFilters based on product material, energy usage, durability, or packaging.
+4. seoTags
+   - Generate 5–10 high-quality e-commerce SEO tags.
+   - Tags must:
+     • Be relevant
+     • Be lowercase
+     • Be concise (1–3 words each)
+     • Not repeat category names unnecessarily
+     • Improve search discoverability
 
-Possible sustainability filters:
+----------------------------------------
+SUSTAINABILITY FILTERS
+----------------------------------------
+
+Determine sustainabilityFilters based ONLY on:
+
+- Material composition
+- Energy usage
+- Packaging type
+- Reusability
+- Environmental impact
+- Production characteristics explicitly implied in description
+
+Possible sustainability filters (ONLY from this list):
 
 plastic-free
 biodegradable
@@ -63,24 +102,44 @@ rechargeable
 minimal-packaging
 natural-material
 
-Rules:
 
-• Only include sustainability filters if applicable.
-• Do NOT invent filters outside the list.
-• If none apply return an empty array [].
+STRICT RULES:
 
-Return STRICT JSON only in the following format:
+- Only include filters that are clearly supported by the product name or description.
+- Do NOT assume.
+- Do NOT infer without evidence.
+- Do NOT invent.
+- If none apply, return an empty array [].
+- Do NOT include any filter outside the list.
+
+
+----------------------------------------
+OUTPUT FORMAT
+----------------------------------------
+
+Return STRICT JSON only.
+No explanations.
+No extra text.
+No markdown.
+No comments.
+
+Format:
 
 {
-"valid": true,
-"primaryCategory": "",
-"primarySubCategory": "",
-"relatedSubCategories": [],
-"seoTags": [],
-"sustainabilityFilters": []
+  "valid": true,
+  "primaryCategory": "",
+  "primarySubCategory": "",
+  "relatedSubCategories": [],
+  "seoTags": [],
+  "sustainabilityFilters": []
 }
 
-Do NOT include explanations or text outside the JSON.
+Ensure:
+- Valid JSON
+- No trailing commas
+- Correct data types
+- All fields present
+- No additional keys
 
 `;
 };

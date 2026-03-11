@@ -16,6 +16,7 @@ export const generateAIData = async (prompt) => {
       .replace(/```/g, "")
       .trim();
 
+    console.log(cleaned);
     return JSON.parse(cleaned);
   } catch (error) {
     console.error("Gemini Error:", error);
