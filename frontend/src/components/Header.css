@@ -1,19 +1,91 @@
-.header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:15px 40px;
-background:#222;
-color:white;
+/* --- Header Container --- */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 40px;
+  
+  /* Glassmorphism Effect */
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+  
+  /* Keeps the header at the top when scrolling */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-.nav-links a{
-margin-left:20px;
-text-decoration:none;
-color:white;
-font-weight:500;
+/* --- Logo Section --- */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.nav-links a:hover{
-color:#4facfe;
+.logo-icon {
+  font-size: 1.5rem;
+}
+
+.logo-text {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+
+  /* Beautiful AI-themed Gradient Text */
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* Optional fallback for non-webkit browsers */
+  color: #6366f1;
+}
+
+/* --- Navigation Links --- */
+.nav-links {
+  display: flex;
+  gap: 12px;
+}
+
+.nav-item {
+  text-decoration: none;
+  color: #64748b;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 8px 18px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+/* Hover State */
+.nav-item:hover {
+  background-color: #f1f5f9;
+  color: #334155;
+}
+
+/* Active State (The page the user is currently on) */
+.nav-item.active {
+  background-color: #eef2ff; /* Light indigo background */
+  color: #6366f1; /* Indigo text */
+  box-shadow: inset 0 0 0 1px #c7d2fe; /* Subtle inner border */
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 600px) {
+  .app-header {
+    flex-direction: column;
+    padding: 16px 20px;
+    gap: 16px;
+  }
+  
+  .nav-links {
+    width: 100%;
+    justify-content: center;
+  }
 }

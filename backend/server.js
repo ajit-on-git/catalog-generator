@@ -18,4 +18,5 @@ app.use("/api/products", productRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server running on port ${process.env.PORT}`);
+  console.log(`Server running on gemini api key ${process.env.GEMINI_API_KEY}`);
 });
