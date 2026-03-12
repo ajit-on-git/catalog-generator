@@ -30,7 +30,7 @@ export default function ProductForm({ setResult }) {
       localStorage.setItem("productDescription", description);
 
       const res = await axios.post(
-        "http://localhost:5000/api/products/generate",
+        "hhttps://ai-catalog-generator-backend.onrender.com/api/products/generate",
         { name, description },
       );
 
